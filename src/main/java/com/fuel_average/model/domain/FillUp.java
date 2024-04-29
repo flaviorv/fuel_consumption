@@ -1,14 +1,19 @@
 package com.fuel_average.model.domain;
 
+import java.util.Date;
+
 public class FillUp {
 
+    private Date date;
     //The latest number is equivalent to a decimal place - Ex: 1000 = 100.0
     private int panelKm;
     private int liters;
     //The latests two numbers is equivalent to two decimal places - Ex: 1000 = 10.00
     private int centsPrice;
 
+
     public FillUp(int panelKm, int liters, int centsPrice) {
+        this.date = new Date();
         this.panelKm = panelKm;
         this.liters = liters;
         this.centsPrice = centsPrice;
@@ -36,5 +41,13 @@ public class FillUp {
 
     public void setCentsPrice(int centsPrice) {
         this.centsPrice = centsPrice;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

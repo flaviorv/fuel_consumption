@@ -8,55 +8,21 @@ public class Vehicle {
     private String name;
     private String type;
     private String model;
-    private int odometerLength;
-    private List<FillUp> fills = new ArrayList<>();
+    private Consumption consumption;
 
-    public Vehicle(String name, String type, String model, int odometerLength) {
+    public Vehicle(String name, String type, String model, int consumption) {
         this.name = name;
         this.type = type;
         this.model = model;
-        this.odometerLength = odometerLength;
+        this.consumption = new Consumption(consumption);
     }
 
-    public FillUp toFill(int panelKm, int liters, int centsPrice){
-        FillUp fillUp = new FillUp(panelKm, liters, centsPrice);
-        fills.add(fillUp);
-        return fillUp;
+    public Consumption getConsumption() {
+        return consumption;
     }
 
-    public float fuelConsumption(){
-        if(moreThanOneFill()) {
-            float kmPerLiter = (float) kmSinceLastFill() / (float) litersFilled();
-            return kmPerLiter;
-        }
-        return 0;
-    }
-
-    public int litersFilled(){
-        FillUp fillUp = fills.get(fills.size() -1);
-        return fillUp.getLiters();
-    }
-
-    public int kmSinceLastFill(){
-
-            FillUp current = fills.get(fills.size() -1);
-            FillUp last = fills.get(fills.size() -2);
-
-            int realCurrentKm = checkOdometerTurn(current.getPanelKm(), last.getPanelKm());
-            int lastKm = last.getPanelKm();
-
-            return realCurrentKm - lastKm;
-    }
-
-    public int checkOdometerTurn(int current, int last){
-        if(current < last){
-            current += 10^odometerLength;
-        }
-        return current;
-    }
-
-    public boolean moreThanOneFill(){
-        return fills.size() > 1;
+    public void setConsumption(Consumption consumption) {
+        this.consumption = consumption;
     }
 
     public String getName() {
@@ -83,11 +49,5 @@ public class Vehicle {
         this.model = model;
     }
 
-    public int getOdometerLength() {
-        return odometerLength;
-    }
 
-    public void setOdometerLength(int odometerLength) {
-        this.odometerLength = odometerLength;
-    }
 }
