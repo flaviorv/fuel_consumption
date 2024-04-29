@@ -14,16 +14,27 @@ public class FillUp {
         this.centsPrice = centsPrice;
     }
 
-    public int fuelConsumption(){
-        int average = 0;
-        try{
-            average = panelKm /liters;
-        }
-        catch (ArithmeticException e) {
-            System.out.println(e);
-            System.out.println("Cannot divide by zero");
-        }
-        return average;
+    public int getPanelKm() {
+        return panelKm;
     }
 
+    public void setPanelKm(int panelKm) {
+        this.panelKm = panelKm;
+    }
+
+    public int getLiters() {
+        return liters;
+    }
+
+    public void setLiters(int liters) {
+        this.liters = liters;
+    }
+
+    public int getCentsPrice() {
+        return centsPrice;
+    }
+
+    public void setCentsPrice(int centsPrice) {
+        this.centsPrice = centsPrice;
+    }
 }
