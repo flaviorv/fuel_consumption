@@ -12,8 +12,8 @@ public class Consumption {
         this.odometerLength = odometerLength;
     }
 
-    public FillUp toFill(int hectometers, int deciliters, int centsPrice){
-        FillUp fillUp = new FillUp(hectometers, deciliters, centsPrice);
+    public FillUp toFill(float km, float liters, float price){
+        FillUp fillUp = new FillUp(km, liters, price);
         fills.add(fillUp);
 
         return fillUp;
@@ -34,9 +34,7 @@ public class Consumption {
             if(fills.indexOf(fill) != 0){
                 StringBuilder sb = new StringBuilder();
                 sb.append(fill.getDate()+" ");
-                sb.append(fill.getDeciliters()+" ");
-                sb.append(fill.getCentsPrice()+" ");
-                sb.append(KmPerLiter(fill, fills.get(fills.indexOf(fill) -1))+"Km/l"+" ");
+                sb.append(fill.formattedKm(KmPerLiter(fill, fills.get(fills.indexOf(fill) -1)))+"/l"+" ");
                 sb.append(fill.formattedMoney(fill.moneySpent()));
                 fillConsumptions.add(sb);
             }
@@ -46,23 +44,21 @@ public class Consumption {
     }
 
     public float KmPerLiter(FillUp current, FillUp last){
-        System.out.println(hmSinceLastFill(current, last));
-        System.out.println(decilitersFilled(current));
-        return ((float) hmSinceLastFill(current, last)/10) / ((float) decilitersFilled(current)/10);
+        return kmSinceLastFill(current, last) / litersFilled(current);
     }
 
-    public int decilitersFilled(FillUp current){
-        return current.getDeciliters();
+    public float litersFilled(FillUp current){
+        return current.getLiters();
     }
 
-    public int hmSinceLastFill(FillUp current, FillUp last){
-        int realCurrentHm = checkOdometerTurn(current.getHectometers(), last.getHectometers());
-        int lastHm = last.getHectometers();
+    public float kmSinceLastFill(FillUp current, FillUp last){
+        float realCurrentHm = checkOdometerTurn(current.getKilometers(), last.getKilometers());
+        float lastHm = last.getKilometers();
 
         return realCurrentHm - lastHm;
     }
 
-    public int checkOdometerTurn(int current, int last){
+    public float checkOdometerTurn(float current, float last){
         if(current < last){
             current += 10^odometerLength;
         }

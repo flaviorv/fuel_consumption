@@ -7,17 +7,17 @@ public class FillUp {
 
     private String date;
     //The latest number is equivalent to a decimal place - Ex: 1000 = 100.0
-    private int hectometers;
-    private int deciliters;
+    private float kilometers;
+    private float liters;
     //The latests two numbers is equivalent to two decimal places - Ex: 1000 = 10.00
-    private int centsPrice;
+    private float price;
 
 
-    public FillUp(int hectometers, int deciliters, int centsPrice) {
+    public FillUp(float kilometers, float liters, float price) {
         this.date = formattedDate(new Date());
-        this.hectometers = hectometers;
-        this.deciliters = deciliters;
-        this.centsPrice = centsPrice;
+        this.kilometers = kilometers;
+        this.liters = liters;
+        this.price = price;
     }
 
     public String formattedDate(Date date){
@@ -26,17 +26,10 @@ public class FillUp {
     }
 
     public float moneySpent(){
-        //1000 is to transform deciliter in liter and centsPrice in reais
-        return (float) deciliters * (float) centsPrice / 1000;
+        return liters * price;
     }
 
-    public float convertToReais(float cents){
-        return cents/100;
-    }
 
-    public float convertToLitersOrKms(float decilitersOrHectometers){
-        return decilitersOrHectometers/10;
-    }
 
     public String formattedMoney(float money){
         String formattedMoney = floatDecimalPlaces(money, 2);
@@ -47,10 +40,10 @@ public class FillUp {
     }
 
     public String formattedLiters(float liters){
-        return floatDecimalPlaces(liters, 1)+"l";
+        return floatDecimalPlaces(liters, 1)+"L";
     }
 
-    public String formattedKilometers(float kilometers){
+    public String formattedKm(float kilometers){
         return floatDecimalPlaces(kilometers, 1)+"km";
     }
 
@@ -58,28 +51,28 @@ public class FillUp {
         return String.format("%."+places+"f", f);
     }
 
-    public int getHectometers() {
-        return hectometers;
+    public float getKilometers() {
+        return kilometers;
     }
 
-    public void setHectometers(int hectometers) {
-        this.hectometers = hectometers;
+    public void setKilometers(float kilometers) {
+        this.kilometers = kilometers;
     }
 
-    public int getDeciliters() {
-        return deciliters;
+    public float getLiters() {
+        return liters;
     }
 
-    public void setDeciliters(int deciliters) {
-        this.deciliters = deciliters;
+    public void setLiters(float liters) {
+        this.liters = liters;
     }
 
-    public int getCentsPrice() {
-        return centsPrice;
+    public float getPrice() {
+        return price;
     }
 
-    public void setCentsPrice(int centsPrice) {
-        this.centsPrice = centsPrice;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public String getDate() {

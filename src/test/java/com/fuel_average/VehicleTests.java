@@ -33,10 +33,10 @@ public class VehicleTests {
     @Test
     void eachFillConsumptionReturnsCorrectValue() {
         Vehicle ferrari = new Vehicle("Ferrari", "Carro", "Gol Quadrado 94", 5);
-        ferrari.getConsumption().toFill(1200, 10, 800);
-        ferrari.getConsumption().toFill(2400, 10, 800);
-        ferrari.getConsumption().toFill(3680, 9, 857);
-        ferrari.getConsumption().toFill(4000, 15, 853);
+        ferrari.getConsumption().toFill(120, 10, 8);
+        ferrari.getConsumption().toFill(240, 10, 8.0f);
+        ferrari.getConsumption().toFill(3680, 9, 8.37f);
+        ferrari.getConsumption().toFill(4000, 15, 8.53f);
 
         ferrari.getConsumption().eachFillConsumption();
     }
