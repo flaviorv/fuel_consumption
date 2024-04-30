@@ -12,39 +12,54 @@ public class Consumption {
         this.odometerLength = odometerLength;
     }
 
-    public void allFillsConsumption(){
+    public FillUp toFill(int hectometers, int deciliters, int centsPrice){
+        FillUp fillUp = new FillUp(hectometers, deciliters, centsPrice);
+        fills.add(fillUp);
+
+        return fillUp;
     }
 
-    public void eachFillConsumption() {
+    public void allFillsConsumption(){
         for (FillUp fill : fills) {
             if(fills.indexOf(fill) != 0){
-                System.out.println( "KmPerLiter: " + KmPerLiter(fill, fills.get(fills.indexOf(fill) -1)));
+
             }
         }
 
     }
 
+    public List<StringBuilder> eachFillConsumption() {
+        List<StringBuilder> fillConsumptions = new ArrayList<>();
+        for (FillUp fill : fills) {
+            if(fills.indexOf(fill) != 0){
+                StringBuilder sb = new StringBuilder();
+                sb.append(fill.getDate()+" ");
+                sb.append(fill.getDeciliters()+" ");
+                sb.append(fill.getCentsPrice()+" ");
+                sb.append(KmPerLiter(fill, fills.get(fills.indexOf(fill) -1))+"Km/l"+" ");
+                sb.append(fill.formattedMoney(fill.moneySpent()));
+                fillConsumptions.add(sb);
+            }
+        }
+        System.out.println(fillConsumptions);
+        return fillConsumptions;
+    }
+
     public float KmPerLiter(FillUp current, FillUp last){
-        return (float) kmSinceLastFill(current, last) / (float) litersFilled(current);
+        System.out.println(hmSinceLastFill(current, last));
+        System.out.println(decilitersFilled(current));
+        return ((float) hmSinceLastFill(current, last)/10) / ((float) decilitersFilled(current)/10);
     }
 
-    public FillUp toFill(int panelKm, int liters, int centsPrice){
-        FillUp fillUp = new FillUp(panelKm, liters, centsPrice);
-        fills.add(fillUp);
-        System.out.println(fillUp.getDate());
-        return fillUp;
+    public int decilitersFilled(FillUp current){
+        return current.getDeciliters();
     }
 
-    public int litersFilled(FillUp current){
-        return current.getLiters();
-    }
+    public int hmSinceLastFill(FillUp current, FillUp last){
+        int realCurrentHm = checkOdometerTurn(current.getHectometers(), last.getHectometers());
+        int lastHm = last.getHectometers();
 
-    public int kmSinceLastFill(FillUp current, FillUp last){
-
-        int realCurrentKm = checkOdometerTurn(current.getPanelKm(), last.getPanelKm());
-        int lastKm = last.getPanelKm();
-
-        return realCurrentKm - lastKm;
+        return realCurrentHm - lastHm;
     }
 
     public int checkOdometerTurn(int current, int last){
