@@ -1,4 +1,4 @@
-package com.fuel_average;
+package com.vehicle_consumption;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

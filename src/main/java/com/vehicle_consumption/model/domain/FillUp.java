@@ -1,4 +1,7 @@
-package com.fuel_average.model.domain;
+package com.vehicle_consumption.model.domain;
+
+import com.vehicle_consumption.model.domain.consumption.Consumption;
+import com.vehicle_consumption.model.domain.consumption.FillUpConsumption;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,6 +14,7 @@ public class FillUp {
     private float liters;
     //The latests two numbers is equivalent to two decimal places - Ex: 1000 = 10.00
     private float price;
+    private FillUpConsumption consumption;
 
 
     public FillUp(float kilometers, float liters, float price) {
@@ -29,8 +33,6 @@ public class FillUp {
         return liters * price;
     }
 
-
-
     public String formattedMoney(float money){
         String formattedMoney = floatDecimalPlaces(money, 2);
         formattedMoney = formattedMoney.replace(".", ",");
@@ -40,7 +42,7 @@ public class FillUp {
     }
 
     public String formattedLiters(float liters){
-        return floatDecimalPlaces(liters, 1)+"L";
+        return floatDecimalPlaces(liters, 1)+"l";
     }
 
     public String formattedKm(float kilometers){
@@ -81,5 +83,13 @@ public class FillUp {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public FillUpConsumption getConsumption() {
+        return consumption;
+    }
+
+    public void setConsumption(FillUpConsumption consumption) {
+        this.consumption = consumption;
     }
 }
