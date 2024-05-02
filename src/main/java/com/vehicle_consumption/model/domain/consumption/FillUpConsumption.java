@@ -7,6 +7,8 @@ import java.util.List;
 
 public class FillUpConsumption extends Consumption{
 
+    float kmSinceLastFill;
+
     public FillUpConsumption(Vehicle vehicle){
         super(vehicle);
     }
@@ -19,16 +21,22 @@ public class FillUpConsumption extends Consumption{
             FillUp current = fills.get(fills.size()-1);
             FillUp last = fills.get(fills.size()-2);
 
+            kmSinceLastFill = kmSinceLastFill(current, last);
+
             kmPerLiter = KmPerLiter(current, last);
             kmPrice = current.getPrice()/kmPerLiter;
-            System.out.println(vehicle.getFills().size());
-            System.out.println("Fill day: " + current.getDate());
-            System.out.println("kmPerLiter: " + kmPerLiter);
-            System.out.println("kmPrice: " + kmPrice);
+
             setKmPrice(kmPrice);
             setKmPerLiter(kmPerLiter);
 
         }
     }
 
+    public float getKmSinceLastFill() {
+        return kmSinceLastFill;
+    }
+
+    public void setKmSinceLastFill(float kmSinceLastFill) {
+        this.kmSinceLastFill = kmSinceLastFill;
+    }
 }

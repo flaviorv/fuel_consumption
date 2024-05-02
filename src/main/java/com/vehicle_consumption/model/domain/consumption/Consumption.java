@@ -28,15 +28,15 @@ public abstract class Consumption {
     }
 
     public float kmSinceLastFill(FillUp current, FillUp last){
-        float realCurrentHm = checkOdometerTurn(current.getKilometers(), last.getKilometers());
-        float lastHm = last.getKilometers();
+        float lastKm = last.getKilometers();
+        float realCurrentHm = checkOdometerTurn(current.getKilometers(),lastKm);
 
-        return realCurrentHm - lastHm;
+        return realCurrentHm - lastKm;
     }
 
     public float checkOdometerTurn(float current, float last){
         if(current < last){
-            current += 10^vehicle.getOdometerLength();
+            current += Math.pow(10, vehicle.getOdometerLength());
         }
         return current;
     }

@@ -9,10 +9,8 @@ import java.util.Date;
 public class FillUp {
 
     private String date;
-    //The latest number is equivalent to a decimal place - Ex: 1000 = 100.0
     private float kilometers;
     private float liters;
-    //The latests two numbers is equivalent to two decimal places - Ex: 1000 = 10.00
     private float price;
     private FillUpConsumption consumption;
 

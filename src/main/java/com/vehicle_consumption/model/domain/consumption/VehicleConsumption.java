@@ -15,13 +15,9 @@ public class VehicleConsumption extends Consumption {
         List<FillUp> fills = vehicle.getFills();
 
         if(fills.size() >= 2){
-            VehicleConsumption vConsumption = vehicle.getConsumption();
 
             FillUp currentFill = fills.get(fills.size()-1);
             FillUpConsumption fConsumption = currentFill.getConsumption();
-
-            float vKmPerLiter = vConsumption.getKmPerLiter();
-            float vKmPrice = vConsumption.getKmPrice();
 
             float fKmPerLiter = fConsumption.getKmPerLiter();
             float fKmPrice = fConsumption.getKmPrice();
@@ -31,18 +27,14 @@ public class VehicleConsumption extends Consumption {
                 kmPrice = fKmPrice;
             }
             else{
+                VehicleConsumption vConsumption = vehicle.getConsumption();
+
+                float vKmPerLiter = vConsumption.getKmPerLiter();
+                float vKmPrice = vConsumption.getKmPrice();
+
                 kmPerLiter = (vKmPerLiter + fKmPerLiter)/2;
                 kmPrice = (vKmPrice + fKmPrice)/2;
             }
-            System.out.println(vehicle.getFills().size());
-
-            System.out.println("Vehicle: " + vehicle.getName());
-            System.out.println("Km/l: " + vehicle.getConsumption().getKmPerLiter());
-            System.out.println("Km price: R$" + vehicle.getConsumption().getKmPrice());
-        }
-        else{
-            System.out.println("Vehicle: " + vehicle.getName());
-            System.out.println("Vehicle without consumption calculation");
         }
     }
 
