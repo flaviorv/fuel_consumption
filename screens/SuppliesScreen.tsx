@@ -7,7 +7,7 @@ export default function SuppliesScreen() {
     const route = useRoute();
     return (
         <View style={styles.screen}>
-            <Text style={styles.title}>{route.params.item.name}</Text>
+            <Text style={styles.title}>{route.params.item.type} {route.params.item.name}</Text>
         </View>
     )   
 }

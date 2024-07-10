@@ -1,37 +1,56 @@
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState, Component} from "react";
+import React from "react";
 import styles from "../styles";
 import Vehicle from "../classes/Vehicle";
+import RNFS from "react-native-fs"
+
 
 
 
 const VehiclesScreen = ({ navigation }) => {
-  let vehicles :Array<Vehicle> = [];
-  const v1 = new Vehicle();
-  v1.name = "Gol Quadrado"
-  v1.setType("car");
 
-  const v2 = new Vehicle();
-  v2.name = "Maveric"
-  v2.setType("car");
+  const [vehicles, setVehicles] = useState(Array<Vehicle>);
+  
 
-  const v3 = new Vehicle();
-  v3.name = "Twister"
-  v3.setType("motorcycle");
+  
+    
 
+  useEffect(()=>{
+    RNFS.readFile(Vehicle.getFilePath(), 'utf8')
+    .then((content)=>{
+      let lines = content.split("\n")
+      let _vehicles: Array<Vehicle> = [];
+      for(let i = 0; i < lines.length-1; i++){
+        let vehicle = lines[i].split(",")
+        let v = new Vehicle();
+        v.name = vehicle[0]
+        v.setType(vehicle[1])
+        _vehicles.push(v)
+      
+       
+      
+      }
+    
+     
+      setVehicles(_vehicles)
+      
+    })
+    .catch((err: Error)=>{
+      console.log(err)
+    })
+  },[])
+   
 
-  Vehicle.saveVehicle(v1);
-  Vehicle.saveVehicle(v2);
-  Vehicle.saveVehicle(v3);
+  console.log(vehicles.length)
 
-  vehicles.push(v1, v2, v3);
 
 
   let vehiclesVisible = false;
   let carsVisible = false;
   let motorcyclesVisible = false;
+ 
 
-  
-  console.log(vehicles.length)
   if(vehicles.length > 0) {
     let types: Array<string> = findVehicleTypes(vehicles);
     vehiclesVisible = true;
@@ -44,9 +63,7 @@ const VehiclesScreen = ({ navigation }) => {
       carsVisible = true;
     }
   }
-  
-
-  Vehicle.checkfile()
+ 
   return(
     
     <View style={styles.screen}>  

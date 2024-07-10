@@ -43,7 +43,7 @@ class Vehicle {
     
 
     static saveVehicle(vehicle: Vehicle){
-        RNFS.writeFile(this.filePath, vehicle.csvData(), 'utf8')
+        RNFS.appendFile(this.filePath, vehicle.csvData(), 'utf8')
         .then(() => {
         console.log('FILE WRITTEN! ' + vehicle.csvData());
         })
