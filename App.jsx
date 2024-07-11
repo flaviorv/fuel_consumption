@@ -19,6 +19,8 @@ const App = () => {
       <Stack.Screen name='NewVehicleScreen' component={NewVehicleScreen} options={{title: "Cadastro de Veículo"}}/>
     </Stack.Navigator>
   </NavigationContainer>
+  
+ 
   );
 };
 

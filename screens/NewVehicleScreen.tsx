@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Vehicle from "../classes/Vehicle";
 import { Button, Text, View } from "react-native";
 import styles from "../styles"

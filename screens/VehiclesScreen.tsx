@@ -4,47 +4,43 @@ import React from "react";
 import styles from "../styles";
 import Vehicle from "../classes/Vehicle";
 import RNFS from "react-native-fs"
+import { useIsFocused } from '@react-navigation/native'
 
 
 
 
-const VehiclesScreen = ({ navigation }) => {
+
+function VehiclesScreen({ navigation }) {
 
   const [vehicles, setVehicles] = useState(Array<Vehicle>);
-  
-
-  
-    
-
-  useEffect(()=>{
-    RNFS.readFile(Vehicle.getFilePath(), 'utf8')
-    .then((content)=>{
-      let lines = content.split("\n")
-      let _vehicles: Array<Vehicle> = [];
-      for(let i = 0; i < lines.length-1; i++){
-        let vehicle = lines[i].split(",")
-        let v = new Vehicle();
-        v.name = vehicle[0]
-        v.setType(vehicle[1])
-        _vehicles.push(v)
-      
-       
-      
-      }
-    
-     
-      setVehicles(_vehicles)
-      
-    })
-    .catch((err: Error)=>{
-      console.log(err)
-    })
-  },[])
+  let isFocused = useIsFocused()
    
-
-  console.log(vehicles.length)
-
-
+       useEffect(()=>{
+        if(isFocused){
+          RNFS.readFile(Vehicle.getFilePath(), 'utf8')
+          .then((content)=>{
+          let lines = content.split("\n")
+          let _vehicles: Array<Vehicle> = [];
+          for(let i = 0; i < lines.length-1; i++){
+            let vehicle = lines[i].split(",")
+            let v = new Vehicle();
+            v.name = vehicle[0]
+            v.setType(vehicle[1])
+            _vehicles.push(v)
+          }
+          setVehicles(_vehicles)
+          console.log(_vehicles.length)
+          
+        })
+        .then(()=>console.log(vehicles.length))
+        .catch((err: Error)=>{
+          console.log(err)
+          console.log("The data may have been deleted")
+          setVehicles([])
+        })
+       
+      }
+    },[isFocused])
 
   let vehiclesVisible = false;
   let carsVisible = false;
@@ -71,7 +67,7 @@ const VehiclesScreen = ({ navigation }) => {
       
         {carsVisible ? 
           (<>
-            <Text style={styles.section}>Carros:</Text>
+            <Text id="123" style={styles.section}>Carros:</Text>
             <FlatList
               data={vehicles}
               renderItem={
