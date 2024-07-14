@@ -1,5 +1,5 @@
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import { useEffect, useState, Component} from "react";
+import { useEffect, useState} from "react";
 import React from "react";
 import styles from "../styles";
 import Vehicle from "../classes/Vehicle";
@@ -32,7 +32,6 @@ function VehiclesScreen({ navigation }) {
           console.log(_vehicles.length)
           
         })
-        .then(()=>console.log(vehicles.length))
         .catch((err: Error)=>{
           console.log(err)
           console.log("The data may have been deleted")

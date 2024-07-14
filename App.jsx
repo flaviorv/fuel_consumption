@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
   <NavigationContainer >
-    <Stack.Navigator initialRouteName='VehiclesScreen'
+    <Stack.Navigator initialRouteName='NewVehicleScreen'
     screenOptions={{
       headerTintColor: '#999999', headerStyle: {backgroundColor: "#111111"}}}
     >

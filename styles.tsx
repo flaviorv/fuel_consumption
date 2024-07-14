@@ -10,15 +10,14 @@ const styles = StyleSheet.create({
         fontSize: 30,
         margin: 10,
         textAlign: "center"
-
     },
     section: {
-        fontSize: 20,
+        color:  "#333666",
+        fontSize: 40,
         fontWeight: '900',
-        backgroundColor: "#555777",
-        paddingLeft: 68,
-        color: "#222555",
-        padding: 6,
+        margin: 20,
+        textAlign: 'center',
+        
     },
     exception: {
         fontSize: 20,
@@ -27,35 +26,42 @@ const styles = StyleSheet.create({
         padding: 40,
         color: "red",
         textAlign: 'center'
-
     },
     roundedButton : {
         
-        backgroundColor: "#666999",
+        backgroundColor:  "#444777",
         alignSelf: "flex-end",
         justifyContent: 'center',
         alignItems:'center', 
-        borderRadius: 22,
+        borderRadius: 30,
         width: 50,
         height: 50, 
         position: "absolute",
         bottom: 38,
-        right: 30,
-
-        // fle
-        
-        
-        
-        
-
+        right: 30, 
     },
     roundedButtonText: {
         fontSize: 28,
-        color: "#222666",
-        fontWeight: '900',
-        
-
+        color: "#777777",
+        fontWeight: '400',
+    },
+    textInput:{
+        backgroundColor: "#888888",
+        width: "60%",
+        borderStyle: "solid",
+        borderWidth: 2,
+        fontSize: 15,
+        borderRadius: 20,
+        height:40,
+        alignSelf: "center",
+        color: "#111222",
+        fontWeight: '700',
+        textAlign: "center"
+    },
+    radioItem: {
+        color: "#999999"
     }
+ 
     
 })
 

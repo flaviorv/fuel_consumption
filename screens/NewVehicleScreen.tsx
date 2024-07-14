@@ -1,35 +1,14 @@
 
 import { useState } from "react";
 import Vehicle from "../classes/Vehicle";
-import { Button, Text, View } from "react-native";
+import { Button, Text, TextInput, View } from "react-native";
 import styles from "../styles"
 import * as RNFS from "react-native-fs"
+import { Controller, useForm } from "react-hook-form";
+import { RadioButton } from "react-native-paper";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 export default function NewVehicleScreen({navigation}){
-
-    function generateNewVehicles(){
-        let vehicles :Array<Vehicle> = [];
-        const v1 = new Vehicle();
-        v1.name = "Gol Quadrado"
-        v1.setType("car");
-
-        const v2 = new Vehicle();
-        v2.name = "Maveric"
-        v2.setType("car");
-
-        const v3 = new Vehicle();
-        v3.name = "Twister"
-        v3.setType("motorcycle");
-
-
-        Vehicle.saveVehicle(v1);
-        Vehicle.saveVehicle(v2);
-        Vehicle.saveVehicle(v3);
-
-        vehicles.push(v1, v2, v3);
-        setStatus("Veículos gerados")
-
-    }
 
     function deleteVehicles(){
         RNFS.unlink(Vehicle.getFilePath())
@@ -40,7 +19,6 @@ export default function NewVehicleScreen({navigation}){
     const [pageChangeStatus, setPageChangeStatus] = useState("")
 
     function pageChangeCount(){
-       
         let count = 5
         let interval = setInterval(()=>{
             if(count==0){
@@ -55,14 +33,38 @@ export default function NewVehicleScreen({navigation}){
 
     }
 
-   
+    
+    const [name, setName] = useState("")
+    const [type, setType] = useState("car")
+    const [label, setLabel] = useState("")
+    
     return (
         <View style = {styles.screen}>
 
+            <TextInput placeholder="Nome do veículo" style={styles.textInput}  onChangeText={(e) => {setName(e.toString())}} value={name} />
+
+            <Text style={styles.title}>Tipo: {type === "car" ? "Carro" : type === "motorcycle" ? "Moto" : null}</Text>
+            <RadioButton.Group onValueChange={value => setType(value)} value={type}>
+                <View style={{flexDirection: "column", justifyContent: "space-evenly"}}> 
+               
+                <RadioButton.Item style={{flexDirection: "column-reverse"}} label="Carro" value="car" labelStyle={{color: "#444777", fontWeight: "bold", fontStyle: "italic"}}  />
+                <RadioButton.Item style={{flexDirection: "column-reverse"}} label="Moto" value="motorcycle" labelStyle={{color: "#444777", fontWeight: "bold", fontStyle: "italic"}} />
+              
+                </View>
+               
+            </RadioButton.Group>
+
+           
+            <Button title="Registrar" onPress={()=>{Vehicle.saveVehicle(new Vehicle(name, type)), pageChangeCount()}}  disabled={status!==""}/>
+
+
+
+
             <Text style={styles.title}>{status}</Text>
+
+
             <Text style={styles.title}>{pageChangeStatus}</Text>
 
-            <Button title="Genetate Vehicles" onPress={()=>{generateNewVehicles(), pageChangeCount()}}  disabled={status!==""}/>
             <Button title="Delete Vehicles" onPress={()=>{deleteVehicles()}}  disabled={status!==""}/>
            
         </View>
