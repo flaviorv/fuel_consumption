@@ -1,8 +1,8 @@
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { useEffect, useState} from "react";
 import React from "react";
-import styles from "../styles";
-import Vehicle from "../classes/Vehicle";
+import styles from "../../styles";
+import { Vehicle } from "../../classes/Vehicle";
 import RNFS from "react-native-fs"
 import { useIsFocused } from '@react-navigation/native'
 
@@ -23,9 +23,7 @@ function VehiclesScreen({ navigation }) {
           let _vehicles: Array<Vehicle> = [];
           for(let i = 0; i < lines.length-1; i++){
             let vehicle = lines[i].split(",")
-            let v = new Vehicle();
-            v.name = vehicle[0]
-            v.setType(vehicle[1])
+            let v = new Vehicle(vehicle[0], vehicle[1]);
             _vehicles.push(v)
           }
           setVehicles(_vehicles)
@@ -70,8 +68,8 @@ function VehiclesScreen({ navigation }) {
             <FlatList
               data={vehicles}
               renderItem={
-                ({item})=> item.getType() === "car" ?  
-                  <Text key={item.name}  style={styles.title} onPress={()=>{navigation.navigate("SuppliesScreen", {item})}}>{item.name}</Text> : <></>
+                ({item})=> item.type === "car" ?  
+                  <Text key={item.name}  style={styles.title} onPress={()=>{navigation.navigate("NewSupplyScreen", {item})}}>{item.name}</Text> : <></>
               }
             />
           </>) : <></>}
@@ -82,8 +80,8 @@ function VehiclesScreen({ navigation }) {
             <FlatList
               data={vehicles}
               renderItem={
-                ({item})=> item.getType() === "motorcycle" ?
-                  <Text key={item.name} style={styles.title} onPress={()=>{navigation.navigate("SuppliesScreen", {item})}}>{item.name}</Text> : <></>
+                ({item})=> item.type === "motorcycle" ?
+                  <Text key={item.name} style={styles.title} onPress={()=>{navigation.navigate("NewSupplyScreen", {item})}}>{item.name}</Text> : <></>
               }
             />
           </>): <></>}
@@ -100,8 +98,8 @@ function findVehicleTypes(content: Array<Vehicle>): Array<string> {
   let types: Array<string> = []
   
   for(let i = 0; i < content.length; i++) {
-    if(!(types.includes(content[i].getType()))){
-      types.push(content[i].getType());
+    if(!(types.includes(content[i].type))){
+      types.push(content[i].type);
     }
   }
   return types;

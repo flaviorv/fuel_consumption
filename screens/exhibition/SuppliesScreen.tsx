@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import styles from "../styles";
+import styles from "../../styles";
 
 
 export default function SuppliesScreen() {

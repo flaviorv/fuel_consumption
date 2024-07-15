@@ -1,25 +1,13 @@
 import { FunctionComponentFactory } from "react";
 import * as RNFS from "react-native-fs";
 
-class Vehicle {
-    name!: string;
-    type!: string;
+export class Vehicle {
+    name: string;
+    type: string;
 
     constructor(name: string, type: string){
         this.name = name,
         this.type = type
-    }
-
-    setType(value: string){
-        if(value === "car" || value === "motorcycle") {
-            this.type = value;
-        }else{
-            throw new Error("Vehicle type must be 'car' or 'motorcycle'.");
-        }
-    }
-
-    getType(): string {
-        return this.type;
     }
 
     csvData(): string{
@@ -30,20 +18,6 @@ class Vehicle {
 
     static getFilePath(): string{
         return this.filePath;
-    }
-    
-    static checkfile(){
-        RNFS.exists(this.filePath)
-        .then((exists) => {
-            if (exists) {
-            console.log('File exists');
-            } else {
-            console.log('File does not exist');
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
     }
     
 
@@ -59,5 +33,3 @@ class Vehicle {
     
 
 }
-
-export default Vehicle;
