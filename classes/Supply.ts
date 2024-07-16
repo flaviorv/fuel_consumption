@@ -2,22 +2,26 @@ import React from "react"
 import * as RNFS  from "react-native-fs"
 
 export class Supply {
-    date: string;
+    date!: string;
     km: number;
     liters: number;
     private static vehicleName?: string;
     
     constructor(km: number, liters: number){
-        this.date = new Date().toLocaleString("BR"),
         this.km = km,
         this.liters = liters;
     }
 
-    csvData(): string{
-        return `${this.date},${this.km},${this.liters}`
+    setCurrentDate(){
+        let currentDate = new Date().toLocaleString("BR").replace(", ", "-");
+        this.date = currentDate;
     }
 
-    private static filePath = RNFS.DocumentDirectoryPath + "/"+this.vehicleName+"/supplies.csv"
+    csvData(): string{
+        return `${this.date},${this.km},${this.liters}\n`;
+    }
+
+    private static filePath = RNFS.DocumentDirectoryPath + "/"+this.vehicleName+"_supplies.csv"
 
     static getFilePath(): string{
         return this.filePath;
@@ -32,7 +36,13 @@ export class Supply {
     }
 
     static saveSupply(supplie: Supply){
-        RNFS.appendFile(this.filePath, supplie.csvData())
+        RNFS.appendFile(this.filePath, supplie.csvData(), "utf8")
+        .then(() => {console.log(`FILE WRITTEN! - ${supplie.csvData()}` )})
+        .catch((error: Error) => {console.log(error.message)})
+    }
+
+    static deleteVehicles(){
+        RNFS.unlink(this.filePath)
     }
 
     

@@ -60,6 +60,11 @@ const styles = StyleSheet.create({
     },
     radioItem: {
         color: "#999999"
+    },
+    supplyTitle: {
+        fontSize: 17,
+        alignSelf: "center",
+        margin: 30
     }
  
     

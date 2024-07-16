@@ -7,29 +7,24 @@ import { Supply } from "../../classes/Supply";
 
 export function NewSupplyScreen({navigation}){
     const route = useRoute();
-    const vheicleName: string = route.params.item.name;
+    const vheicleName: string = route.params.toString();
 
     const supply = new Supply(0, 0)
-    const currentDate: string = supply.date;
-
-    const [km, setKm] = useState(0);
-    const [liters, setLiters] = useState(0)
-   
-    useEffect(() => {
-        console.log(supply)
-        console.log(km, liters)
-    },[km, liters])
+    supply.setCurrentDate()
 
     return (
         <View style={styles.screen}>    
-            <Text style={styles.title}>{currentDate}{"\n"}ABASTECIMENTO DE {vheicleName.toUpperCase()}</Text>
-            <TextInput placeholder="km" onChangeText={(_km: string) => setKm(Number(_km))}/>
-            <TextInput placeholder="litros" onChangeText={(_liters: string) => {setLiters(Number(_liters))}}/>
-            <TouchableOpacity style={{alignItems: "center"}} onPress={()=>{
-                supply.km = km, supply.liters = liters,
+            <Text style={styles.supplyTitle}>{supply.date+"\nAbastecimento de "+vheicleName}</Text>
+            <TextInput placeholder="km" onChangeText={(_km: string) => {supply.km = Number(_km);}}/>
+            <TextInput placeholder="litros" onChangeText={(_liters: string) => {supply.liters = Number(_liters);}}/>
+            <TouchableOpacity style={{alignItems: "center"}} onPress={() => {
                 Supply.setVehicleName(vheicleName), Supply.saveSupply(supply)}} >
                 <Image source={require("../../images/icons8-bomba-de-gasolina-40.png")}/>
                 <Text style={{fontSize: 20}}>Confirmar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{alignItems: "center"}} onPress={() => {
+                Supply.setVehicleName(vheicleName), Supply.deleteVehicles()}} >
+                <Text style={{fontSize: 20}}>Excluir abastecimentos</Text>
             </TouchableOpacity>
            
         </View>

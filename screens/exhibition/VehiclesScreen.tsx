@@ -6,10 +6,6 @@ import { Vehicle } from "../../classes/Vehicle";
 import RNFS from "react-native-fs"
 import { useIsFocused } from '@react-navigation/native'
 
-
-
-
-
 function VehiclesScreen({ navigation }) {
 
   const [vehicles, setVehicles] = useState(Array<Vehicle>);
@@ -69,7 +65,7 @@ function VehiclesScreen({ navigation }) {
               data={vehicles}
               renderItem={
                 ({item})=> item.type === "car" ?  
-                  <Text key={item.name}  style={styles.title} onPress={()=>{navigation.navigate("NewSupplyScreen", {item})}}>{item.name}</Text> : <></>
+                  <Text key={item.name}  style={styles.title} onPress={()=>{navigation.navigate("SppliesScreen", {item})}}>{item.name}</Text> : <></>
               }
             />
           </>) : <></>}
@@ -81,7 +77,7 @@ function VehiclesScreen({ navigation }) {
               data={vehicles}
               renderItem={
                 ({item})=> item.type === "motorcycle" ?
-                  <Text key={item.name} style={styles.title} onPress={()=>{navigation.navigate("NewSupplyScreen", {item})}}>{item.name}</Text> : <></>
+                  <Text key={item.name} style={styles.title} onPress={()=>{navigation.navigate("SuppliesScreen", {item})}}>{item.name}</Text> : <></>
               }
             />
           </>): <></>}
