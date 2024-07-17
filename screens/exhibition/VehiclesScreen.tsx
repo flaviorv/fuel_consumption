@@ -65,7 +65,7 @@ function VehiclesScreen({ navigation }) {
               data={vehicles}
               renderItem={
                 ({item})=> item.type === "car" ?  
-                  <Text key={item.name}  style={styles.title} onPress={()=>{navigation.navigate("SppliesScreen", {item})}}>{item.name}</Text> : <></>
+                  <Text key={item.name}  style={styles.title} onPress={()=>{navigation.navigate("ConsumptionScreen", {item})}}>{item.name}</Text> : <></>
               }
             />
           </>) : <></>}
@@ -77,7 +77,7 @@ function VehiclesScreen({ navigation }) {
               data={vehicles}
               renderItem={
                 ({item})=> item.type === "motorcycle" ?
-                  <Text key={item.name} style={styles.title} onPress={()=>{navigation.navigate("SuppliesScreen", {item})}}>{item.name}</Text> : <></>
+                  <Text key={item.name} style={styles.title} onPress={()=>{navigation.navigate("ConsumptionScreen", {item})}}>{item.name}</Text> : <></>
               }
             />
           </>): <></>}

@@ -5,6 +5,8 @@ export class Supply {
     date!: string;
     km: number;
     liters: number;
+    kmTraveledSincePrevious: number= 0;
+    consumptionSincePrevious: string = "--";
     private static vehicleName?: string;
     
     constructor(km: number, liters: number){
@@ -24,6 +26,7 @@ export class Supply {
     private static filePath = RNFS.DocumentDirectoryPath + "/"+this.vehicleName+"_supplies.csv"
 
     static getFilePath(): string{
+        console.log(this.filePath);
         return this.filePath;
     }
 
@@ -45,5 +48,24 @@ export class Supply {
         RNFS.unlink(this.filePath)
     }
 
+    calculateConsumption(){
+        if(this.kmTraveledSincePrevious != 0){
+            this.consumptionSincePrevious = `${this.kmTraveledSincePrevious/this.liters}`;
+        }else{
+            console.log("Error - kmTraveledSincePrevious needs to be calculated")
+        }
+    }
+
+    calculateKmTraveled(previousSupply: Supply){
+        let traveled = this.km - previousSupply.km;
+        return this.kmTraveledSincePrevious = traveled;
+    }
+
+    fixLengthOdometerOnTurning(current: number, last: number){
+        if(current < last){
+            current += Math.pow(10, last.toString().length);
+        }
+        return current;
+    }
     
 }
