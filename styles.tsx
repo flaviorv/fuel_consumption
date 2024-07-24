@@ -6,18 +6,20 @@ const styles = StyleSheet.create({
        flex: 1,
     },
     title: {
-        color: "#555777",
+        color: "#999999",
         fontSize: 30,
         margin: 10,
-        textAlign: "center"
+        textAlign: "center",
+        textDecorationStyle: "solid"
     },
     section: {
-        color:  "#333666",
+        color:  "#000000",
         fontSize: 40,
         fontWeight: '900',
         margin: 20,
-        textAlign: 'center',
-        
+        textAlign: 'center', 
+        textDecorationLine: 'underline',
+        fontStyle: "italic"
     },
     exception: {
         fontSize: 20,
@@ -29,10 +31,10 @@ const styles = StyleSheet.create({
     },
     roundedButton : {
         
-        backgroundColor:  "#444777",
+        backgroundColor:  "#000000",
         alignSelf: "flex-end",
         justifyContent: 'center',
-        alignItems:'center', 
+        alignItems:'center',
         borderRadius: 30,
         width: 50,
         height: 50, 
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
         fontSize: 28,
         color: "#777777",
         fontWeight: '400',
+        
     },
     textInput:{
         backgroundColor: "#888888",
@@ -62,9 +65,24 @@ const styles = StyleSheet.create({
         color: "#999999"
     },
     supplyTitle: {
-        fontSize: 17,
+        fontSize: 20,
         alignSelf: "center",
-        margin: 30
+        margin: 15,
+        color: "#556466",
+        fontFamily: "RobotoCondensed-ExtraBold"
+    },
+    vehiclesIcon: {
+        tintColor:"#333666",
+        marginTop: 20,
+        width: 40,
+        height: 40,
+        alignSelf: "center"
+    },
+    newVehicleIcon: {
+        marginTop: 20,
+        width: "100%",
+        height: "50%",
+        alignSelf: "center"
     }
  
     

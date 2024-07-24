@@ -12,10 +12,10 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
   <NavigationContainer >
-    <Stack.Navigator initialRouteName='VehicleScreen' screenOptions={{headerTintColor: '#999999', headerStyle: {backgroundColor: "#111111"},}}>
-      <Stack.Screen name='VehiclesScreen' component={VehiclesScreen} options={{title: "Veículos",}}/>
+    <Stack.Navigator initialRouteName='VehicleScreen' screenOptions={{headerTintColor: '#999999', headerStyle: {backgroundColor: "#111111"}, headerTitleAlign: "center"}}>
+      <Stack.Screen name='VehiclesScreen' component={VehiclesScreen} options={{headerTitle: "Veículos",}}/>
       <Stack.Screen name='NewVehicleScreen' component={NewVehicleScreen} options={{title: "Cadastro de Veículo"}}/>
-      <Stack.Screen name='SupplyScreen' component={SupplyScreen} options={{title: "Abastecimentos"}}/>
+      <Stack.Screen name='SupplyScreen' component={SupplyScreen} options={{headerTitle: "Abastecimento"}}/>
       <Stack.Screen name="NewSupplyScreen" component={NewSupplyScreen} options={{title: "Abastecer"}}/>
       <Stack.Screen name="ConsumptionScreen" component={ConsumptionScreen} options = {{title: "Consumo"}}/>
     </Stack.Navigator>

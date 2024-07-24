@@ -6,6 +6,7 @@ export class Vehicle {
     type: string;
 
     constructor(name: string, type: string){
+        name = name.replace(name[0], name[0].toUpperCase())
         this.name = name,
         this.type = type
     }

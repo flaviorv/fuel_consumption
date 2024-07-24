@@ -8,6 +8,8 @@ export class Supply {
     kmTraveledSincePrevious: number= 0;
     consumptionSincePrevious: string = "--";
     private static vehicleName?: string;
+    private static filePath: string;
+
     
     constructor(km: number, liters: number){
         this.km = km,
@@ -23,11 +25,13 @@ export class Supply {
         return `${this.date},${this.km},${this.liters}\n`;
     }
 
-    private static filePath = RNFS.DocumentDirectoryPath + "/"+this.vehicleName+"_supplies.csv"
-
+    
     static getFilePath(): string{
-        console.log(this.filePath);
         return this.filePath;
+    }
+
+    static setFilePath() {
+        this.filePath =  RNFS.DocumentDirectoryPath + "/"+this.vehicleName+"_supplies.csv";
     }
 
     static setVehicleName(vehicleName: string){

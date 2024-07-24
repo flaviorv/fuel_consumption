@@ -1,4 +1,4 @@
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useEffect, useState} from "react";
 import React from "react";
 import styles from "../../styles";
@@ -9,7 +9,8 @@ import { useIsFocused } from '@react-navigation/native'
 function VehiclesScreen({ navigation }) {
 
   const [vehicles, setVehicles] = useState(Array<Vehicle>);
-  let isFocused = useIsFocused()
+  const isFocused = useIsFocused()
+  const backgroundImage = "../../images/gas_station/gs3.jpg"
    
        useEffect(()=>{
         if(isFocused){
@@ -55,9 +56,12 @@ function VehiclesScreen({ navigation }) {
  
   return(
     
-    <View style={styles.screen}>  
-      { !vehiclesVisible ?(<Text style={styles.exception}>Nenhum veículo registrado</Text>) : (<>
-      
+    <View style={{backgroundColor: "#000000"}}>
+      <ImageBackground style={{width: "100%", height: "100%", zIndex: 0, opacity: 0.4, position: "absolute" }} resizeMode="cover" source={require(backgroundImage)}/ >
+      <ScrollView>
+   
+        { !vehiclesVisible ?(<Text style={styles.exception}>Nenhum veículo registrado</Text>) : (<>
+        
         {carsVisible ? 
           (<>
             <Text id="123" style={styles.section}>Carros:</Text>
@@ -81,9 +85,13 @@ function VehiclesScreen({ navigation }) {
               }
             />
           </>): <></>}
-            
-      </>)}
-      <TouchableOpacity style={styles.roundedButton} onPress={()=> navigation.navigate("NewVehicleScreen")}><Text style={styles.roundedButtonText} >+</Text></TouchableOpacity>          
+        
+        </>)}
+        </ScrollView>
+    
+        <TouchableOpacity style={styles.roundedButton} onPress={()=> navigation.navigate("NewVehicleScreen")}><Text style={styles.roundedButtonText} >+</Text></TouchableOpacity>     
+      {/* </ImageBackground> */}
+         
     </View>
       
   )

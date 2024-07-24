@@ -1,4 +1,4 @@
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import styles from "../../styles";
 import { useEffect, useState } from "react";
@@ -8,7 +8,6 @@ import { DataTable } from "react-native-paper";
 import {ConsumptionAverage} from "../../classes/ConsumptionAverage"
 
 
-
 export function ConsumptionScreen({navigation, route}) {
     
     const isFocused = useIsFocused();
@@ -16,6 +15,9 @@ export function ConsumptionScreen({navigation, route}) {
     const [average, setAverage] = useState(0);
 
     Supply.setVehicleName(route.params.item.name);
+    Supply.setFilePath();
+    console.log(route.params.item.name)
+    console.log(Supply.getFilePath());
     
     useEffect(()=>{
         if(isFocused){
@@ -37,16 +39,16 @@ export function ConsumptionScreen({navigation, route}) {
                         let previousSupply = new Supply(prevKm, prevL);
                         currentSupply.calculateKmTraveled(previousSupply);
                         currentSupply.calculateConsumption();
+                        
                         conAverage.totalKm += currentSupply.kmTraveledSincePrevious;
-                        console.log(conAverage.totalKm)
                         conAverage.totalL += l;
-                        console.log(conAverage.totalL)
+                        console.log("km " + conAverage.totalKm + "liters " + conAverage.totalL);
                     }
                    
                     _supplies.push(currentSupply);
                 }
                 let average = conAverage.calculate(conAverage.totalKm, conAverage.totalL);
-                setAverage(average);
+                setAverage(Number(average));
                 setSupplies(_supplies);
             })
             .catch((error: Error) => {
@@ -59,12 +61,17 @@ export function ConsumptionScreen({navigation, route}) {
 
     return (
         <View style={styles.screen}>
-            <Text style={styles.title}>{route.params.item.type} {route.params.item.name}</Text>
-            {supplies.length === 0 ? <Text>Não há abastecimentos ainda</Text> :
+            {route.params.item.type === "car" ? 
+                <Image style={styles.vehiclesIcon} source={require("../../images/cars/c3.png")}/> : 
+                <Image style={styles.vehiclesIcon} source={require("../../images/motorcycles/m3.png")}/>} 
+            <Text style={{textAlign: "center", fontFamily: "NotoSerif-Thin", color: "#556466", fontSize: 17}}>{route.params.item.name}</Text>
+            {supplies.length === 0 ? <Text style={styles.exception}>Não há abastecimentos ainda</Text> :
                 <>
-                <Text style={styles.title}>{average}</Text>
-                <DataTable>
-                    <DataTable.Header style={{ backgroundColor: "#654879", borderColor: "#000000"}}>
+                
+                <Text style={{fontSize: 20, fontFamily: "RobotoCondensed-Italic", color: "#556466", textAlign: "center"}}>Consumo médio:</Text>
+                <Text style={{fontSize: 30, fontFamily: "RobotoCondensed-Italic", color: "#556466", textAlign: "center"}}>{average} litros</Text>
+                <DataTable style={{alignSelf: "center", width: "90%", marginTop: 40, height: 350}}>
+                    <DataTable.Header style={{ backgroundColor: "#333666", borderColor: "#000000"}}>
                         <DataTable.Cell>CONSUMO</DataTable.Cell>
                         <DataTable.Cell>DATA</DataTable.Cell>
                     </DataTable.Header>
@@ -72,7 +79,7 @@ export function ConsumptionScreen({navigation, route}) {
                     <FlatList 
                         data={supplies}
                         renderItem={({item})=>
-                            <DataTable.Row key={item.date} style={{ backgroundColor: "#866989"}} onPress={()=>{
+                            <DataTable.Row key={item.date} style={{ backgroundColor: "#556466", borderColor: "#000000"}} onPress={()=>{
                                 navigation.navigate("SupplyScreen", {item});
                             }}>
                                 <DataTable.Cell>{item.consumptionSincePrevious}</DataTable.Cell>
@@ -84,7 +91,7 @@ export function ConsumptionScreen({navigation, route}) {
                 </DataTable>
                 </>
             }
-            <TouchableOpacity style={styles.roundedButton} onPress={()=> {
+            <TouchableOpacity style={[styles.roundedButton]} onPress={()=> {
                 navigation.navigate("NewSupplyScreen", Supply.getVehicleName())}}>
                 <Text style={styles.roundedButtonText} >+</Text>
             </TouchableOpacity>          

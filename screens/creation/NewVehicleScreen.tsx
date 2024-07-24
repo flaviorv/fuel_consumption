@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Vehicle } from "../../classes/Vehicle";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, Image, Text, TextInput, Touchable, View } from "react-native";
 import styles from "../../styles"
 import * as RNFS from "react-native-fs"
 import { RadioButton } from "react-native-paper";
@@ -35,13 +35,15 @@ export default function NewVehicleScreen({navigation}){
     const [type, setType] = useState("car")
     
     return (
-        <View style = {styles.screen}>
+        <View style = {[styles.screen]}>
 
-            <TextInput placeholder="Nome do veículo" style={styles.textInput}  onChangeText={(e) => {setName(e.toString())}} value={name} editable={status==="Registrando..."? false : true} />
+            {type === "car" ? <Image style={styles.newVehicleIcon} source={require("../../images/cars/c14.png")}/> : type === "motorcycle" ? <Image style={styles.newVehicleIcon} source={require("../../images/motorcycles/m1.png")}/> : null}
 
-            <Text style={styles.title}>Tipo: {type === "car" ? "Carro" : type === "motorcycle" ? "Moto" : null}</Text>
+            <TextInput placeholder="Nome do veículo" style={[styles.textInput, {marginTop: 70}]}  onChangeText={(e) => {setName(e.toString())}} value={name} editable={status==="Registrando..."? false : true} />
+
+          
             <RadioButton.Group onValueChange={value => setType(value)} value={type}>
-                <View>     
+                <View style={{ justifyContent: "center" }}>     
                     <RadioButton.Item style={{flexDirection: "column-reverse"}} label="Carro" value="car" 
                     labelStyle={{color: "#444777", fontWeight: "bold", fontStyle: "italic"}} disabled={status==="Registrando..."} />
                     <RadioButton.Item style={{flexDirection: "column-reverse"}} label="Moto" value="motorcycle" 
@@ -49,9 +51,12 @@ export default function NewVehicleScreen({navigation}){
                 </View>
             </RadioButton.Group>
 
-           
-            <Button title="Registrar" onPress={()=>{setStatus("Registrando..."), Vehicle.saveVehicle(new Vehicle(name, type)), pageChangeCount()}}  disabled={status==="Registrando..."}/>
-
+            <View style={{width: "40%", alignSelf: "center"}}>
+                <Button color={"#000000"} title="Cadastrar" onPress={()=>{setStatus("Registrando..."), Vehicle.saveVehicle(new Vehicle(name, type)), pageChangeCount()}}  disabled={status==="Aguarde..."}/>
+            </View>
+          
+     
+          
 
             <Text style={styles.title}>{status}</Text>
 

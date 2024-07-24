@@ -19,7 +19,7 @@ export function NewSupplyScreen({navigation}){
             <TextInput placeholder="litros" onChangeText={(_liters: string) => {supply.liters = Number(_liters);}}/>
             <TouchableOpacity style={{alignItems: "center"}} onPress={() => {
                 Supply.setVehicleName(vheicleName), Supply.saveSupply(supply)}} >
-                <Image source={require("../../images/icons8-bomba-de-gasolina-40.png")}/>
+                <Image source={require("../../images/gas_station/gs5.png")}/>
                 <Text style={{fontSize: 20}}>Confirmar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{alignItems: "center"}} onPress={() => {

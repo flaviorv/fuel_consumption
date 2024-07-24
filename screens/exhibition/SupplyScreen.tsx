@@ -11,14 +11,18 @@ import {ConsumptionAverage} from "../../classes/ConsumptionAverage"
 
 export function SupplyScreen({navigation, route}) {
     
-
+    let date = route.params.item.date.split("-")
+    let day = date[0];
+    let hour = date[1];
     return (
         <View style={styles.screen}>
-            <Text style={styles.title}>{route.params.item.date}</Text>
-            <Text style={styles.title}>{route.params.item.liters} litros abastecidos</Text>
-            <Text style={styles.title}>Odômetro: {route.params.item.km} km</Text>
-           
-           
+            <View style={{marginTop: 50}}>
+                <Text style={styles.supplyTitle}>Dia: {day}</Text>
+                <Text style={styles.supplyTitle}>Horário: {hour}</Text>
+                <Text style={styles.supplyTitle}>Quantidade: {route.params.item.liters} litros</Text>
+                <Text style={styles.supplyTitle}>Odômetro: {route.params.item.km} Km</Text>       
+            </View>
+            
         </View>
     )   
 }
