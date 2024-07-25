@@ -65,24 +65,22 @@ const styles = StyleSheet.create({
         color: "#999999"
     },
     supplyTitle: {
-        fontSize: 20,
+        fontSize: 23,
         alignSelf: "center",
-        margin: 15,
+        marginBottom: 15,
         color: "#556466",
-        fontFamily: "RobotoCondensed-ExtraBold"
+        fontFamily: "RobotoCondensed-Light"
     },
     vehiclesIcon: {
-        tintColor:"#333666",
         marginTop: 20,
-        width: 40,
-        height: 40,
+        width: 60,
+        height: 60,
         alignSelf: "center"
     },
     newVehicleIcon: {
-        marginTop: 20,
         width: "100%",
         height: "50%",
-        alignSelf: "center"
+        alignSelf: "center",
     }
  
     

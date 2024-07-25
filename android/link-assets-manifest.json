@@ -2,6 +2,42 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/NotoSerif-Black.ttf",
+      "sha1": "d8a0543512141b9e87def8fedb0ae9a1be8c1ccc"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-Bold.ttf",
+      "sha1": "0c517e9769777aad8eb0ac5dccfbd7f737e83c13"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-ExtraBold.ttf",
+      "sha1": "550380fb5c1f29af0df336014d9b1a4c82d30ada"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-ExtraLight.ttf",
+      "sha1": "ff7e528c77605fb39dad48ac1979372fe032459c"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-Light.ttf",
+      "sha1": "9dbdd5d2fb17a71a673ab0734808b8c406b4b31e"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-Medium.ttf",
+      "sha1": "a5b3506b3794540db15dee482cc4826d8f764174"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-Regular.ttf",
+      "sha1": "e75978c49a8a21f9180cb476ffdb7b0d637f6622"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-SemiBold.ttf",
+      "sha1": "fc7df4cb72b7cd95a61d9f3bf89e4f277b591d17"
+    },
+    {
+      "path": "assets/fonts/NotoSerif-Thin.ttf",
+      "sha1": "8da3fb730dc6245c8e8b4b8bd4aca57b090160c5"
+    },
+    {
       "path": "assets/fonts/RobotoCondensed-Black.ttf",
       "sha1": "8a3e06d7c062d59541705c31a8281c3c753499d7"
     },

@@ -56,10 +56,9 @@ function VehiclesScreen({ navigation }) {
  
   return(
     
-    <View style={{backgroundColor: "#000000"}}>
+    <View style={{backgroundColor: "#000000", flex: 1}}>
       <ImageBackground style={{width: "100%", height: "100%", zIndex: 0, opacity: 0.4, position: "absolute" }} resizeMode="cover" source={require(backgroundImage)}/ >
-      <ScrollView>
-   
+
         { !vehiclesVisible ?(<Text style={styles.exception}>Nenhum veículo registrado</Text>) : (<>
         
         {carsVisible ? 
@@ -87,10 +86,9 @@ function VehiclesScreen({ navigation }) {
           </>): <></>}
         
         </>)}
-        </ScrollView>
+       
     
         <TouchableOpacity style={styles.roundedButton} onPress={()=> navigation.navigate("NewVehicleScreen")}><Text style={styles.roundedButtonText} >+</Text></TouchableOpacity>     
-      {/* </ImageBackground> */}
          
     </View>
       

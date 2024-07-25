@@ -15,14 +15,11 @@ export function SupplyScreen({navigation, route}) {
     let day = date[0];
     let hour = date[1];
     return (
-        <View style={styles.screen}>
-            <View style={{marginTop: 50}}>
+        <View style={[styles.screen, {justifyContent: "space-evenly"}]}> 
                 <Text style={styles.supplyTitle}>Dia: {day}</Text>
                 <Text style={styles.supplyTitle}>Horário: {hour}</Text>
                 <Text style={styles.supplyTitle}>Quantidade: {route.params.item.liters} litros</Text>
-                <Text style={styles.supplyTitle}>Odômetro: {route.params.item.km} Km</Text>       
-            </View>
-            
+                <Text style={styles.supplyTitle}>Odômetro: {route.params.item.km} Km</Text>                
         </View>
     )   
 }

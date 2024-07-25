@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Vehicle } from "../../classes/Vehicle";
-import { Button, Image, Text, TextInput, Touchable, View } from "react-native";
+import { Button, Image, ScrollView, Text, TextInput, Touchable, View } from "react-native";
 import styles from "../../styles"
 import * as RNFS from "react-native-fs"
 import { RadioButton } from "react-native-paper";
@@ -14,21 +14,6 @@ export default function NewVehicleScreen({navigation}){
     }
 
     const [status, setStatus] = useState("");
-    const [pageChangeStatus, setPageChangeStatus] = useState("")
-
-    function pageChangeCount(){
-        let count = 5
-        let interval = setInterval(()=>{
-            if(count==0){
-                clearInterval(interval)
-                return  navigation.navigate("VehiclesScreen")
-
-            }
-            count--; 
-            setPageChangeStatus("Indo para página de veículos em "+count);
-        }, 1000)
-        
-    }
 
     
     const [name, setName] = useState("")
@@ -37,32 +22,27 @@ export default function NewVehicleScreen({navigation}){
     return (
         <View style = {[styles.screen]}>
 
-            {type === "car" ? <Image style={styles.newVehicleIcon} source={require("../../images/cars/c14.png")}/> : type === "motorcycle" ? <Image style={styles.newVehicleIcon} source={require("../../images/motorcycles/m1.png")}/> : null}
+            {type === "car" ? <Image style={styles.newVehicleIcon} source={require("../../images/cars/c14.png")}/> : <Image style={styles.newVehicleIcon} source={require("../../images/motorcycles/m1.png")}/> }
 
-            <TextInput placeholder="Nome do veículo" style={[styles.textInput, {marginTop: 70}]}  onChangeText={(e) => {setName(e.toString())}} value={name} editable={status==="Registrando..."? false : true} />
+            <ScrollView>
+                <TextInput placeholder="Nome do veículo" style={[styles.textInput, {marginTop: 70}]}  onChangeText={(e) => {setName(e.toString())}} value={name} editable={status==="Registrando..."? false : true} />
 
-          
-            <RadioButton.Group onValueChange={value => setType(value)} value={type}>
-                <View style={{ justifyContent: "center" }}>     
-                    <RadioButton.Item style={{flexDirection: "column-reverse"}} label="Carro" value="car" 
-                    labelStyle={{color: "#444777", fontWeight: "bold", fontStyle: "italic"}} disabled={status==="Registrando..."} />
-                    <RadioButton.Item style={{flexDirection: "column-reverse"}} label="Moto" value="motorcycle" 
-                    labelStyle={{color: "#444777", fontWeight: "bold", fontStyle: "italic"}} disabled={status==="Registrando..."}/>
+                <RadioButton.Group onValueChange={value => setType(value)} value={type}>
+                    <View style={{ justifyContent: "center" }}>     
+                        <RadioButton.Item style={{flexDirection: "column-reverse"}} label="Carro" value="car" 
+                        labelStyle={{color: "#444777", fontWeight: "bold", fontStyle: "italic"}} disabled={status==="Registrando..."} />
+                        <RadioButton.Item style={{flexDirection: "column-reverse"}} label="Moto" value="motorcycle" 
+                        labelStyle={{color: "#444777", fontWeight: "bold", fontStyle: "italic"}} disabled={status==="Registrando..."}/>
+                    </View>
+                </RadioButton.Group>
+
+                <View style={{width: "40%", alignSelf: "center"}}>
+                    <Button color={"#000000"} title="Cadastrar" onPress={()=>{setStatus("Aguarde..."), Vehicle.saveVehicle(new Vehicle(name, type))}}  disabled={status==="Aguarde..."}/>
                 </View>
-            </RadioButton.Group>
 
-            <View style={{width: "40%", alignSelf: "center"}}>
-                <Button color={"#000000"} title="Cadastrar" onPress={()=>{setStatus("Registrando..."), Vehicle.saveVehicle(new Vehicle(name, type)), pageChangeCount()}}  disabled={status==="Aguarde..."}/>
-            </View>
-          
-     
-          
-
-            <Text style={styles.title}>{status}</Text>
-
-            <Text style={styles.title}>{pageChangeStatus}</Text>
-
-            <Button title="Delete Vehicles" onPress={()=>{deleteVehicles()}}  disabled={status!==""}/>
+                <Button title="Delete Vehicles" onPress={()=>{deleteVehicles()}}  disabled={status!==""}/>
+                
+            </ScrollView>
            
         </View>
     )

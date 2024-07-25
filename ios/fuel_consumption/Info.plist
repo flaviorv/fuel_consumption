@@ -67,6 +67,15 @@
 		<string>RobotoCondensed-SemiBoldItalic.ttf</string>
 		<string>RobotoCondensed-Thin.ttf</string>
 		<string>RobotoCondensed-ThinItalic.ttf</string>
+		<string>NotoSerif-Black.ttf</string>
+		<string>NotoSerif-Bold.ttf</string>
+		<string>NotoSerif-ExtraBold.ttf</string>
+		<string>NotoSerif-ExtraLight.ttf</string>
+		<string>NotoSerif-Light.ttf</string>
+		<string>NotoSerif-Medium.ttf</string>
+		<string>NotoSerif-Regular.ttf</string>
+		<string>NotoSerif-SemiBold.ttf</string>
+		<string>NotoSerif-Thin.ttf</string>
 	</array>
 </dict>
 </plist>

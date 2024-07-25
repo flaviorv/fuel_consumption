@@ -62,28 +62,28 @@ export function ConsumptionScreen({navigation, route}) {
     return (
         <View style={styles.screen}>
             {route.params.item.type === "car" ? 
-                <Image style={styles.vehiclesIcon} source={require("../../images/cars/c3.png")}/> : 
-                <Image style={styles.vehiclesIcon} source={require("../../images/motorcycles/m3.png")}/>} 
-            <Text style={{textAlign: "center", fontFamily: "NotoSerif-Thin", color: "#556466", fontSize: 17}}>{route.params.item.name}</Text>
+                <Image style={styles.vehiclesIcon} source={require("../../images/cars/c7.png")}/> : 
+                <Image style={[styles.vehiclesIcon, {width: 80}]} source={require("../../images/motorcycles/m4.png")}/>} 
+            <Text style={{textAlign: "center", fontFamily: "", color: "#556466", fontSize: 17}}>{route.params.item.name}</Text>
             {supplies.length === 0 ? <Text style={styles.exception}>Não há abastecimentos ainda</Text> :
                 <>
                 
                 <Text style={{fontSize: 20, fontFamily: "RobotoCondensed-Italic", color: "#556466", textAlign: "center"}}>Consumo médio:</Text>
-                <Text style={{fontSize: 30, fontFamily: "RobotoCondensed-Italic", color: "#556466", textAlign: "center"}}>{average} litros</Text>
-                <DataTable style={{alignSelf: "center", width: "90%", marginTop: 40, height: 350}}>
+                <Text style={{fontSize: 30, fontFamily: "RobotoCondensed-Italic", color: "#664578", textAlign: "center"}}>{average} litros</Text>
+                <DataTable style={{alignSelf: "center", width: "100%", marginTop: 40, height: 350, borderWidth: 3, borderColor: "#777777", backgroundColor: "#333666"}}>
                     <DataTable.Header style={{ backgroundColor: "#333666", borderColor: "#000000"}}>
-                        <DataTable.Cell>CONSUMO</DataTable.Cell>
-                        <DataTable.Cell>DATA</DataTable.Cell>
+                        <DataTable.Cell><Text style={{fontSize: 15}}>CONSUMO</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={{fontSize: 15}}>DATA</Text></DataTable.Cell>
                     </DataTable.Header>
                 
                     <FlatList 
                         data={supplies}
                         renderItem={({item})=>
-                            <DataTable.Row key={item.date} style={{ backgroundColor: "#556466", borderColor: "#000000"}} onPress={()=>{
+                            <DataTable.Row key={item.date} style={{ backgroundColor: "#664578", borderColor: "#000000"}} onPress={()=>{
                                 navigation.navigate("SupplyScreen", {item});
                             }}>
-                                <DataTable.Cell>{item.consumptionSincePrevious}</DataTable.Cell>
-                                <DataTable.Cell>{item.date}  </DataTable.Cell>
+                                <DataTable.Cell><Text>{item.consumptionSincePrevious}</Text></DataTable.Cell>
+                                <DataTable.Cell><Text>{item.date}</Text></DataTable.Cell>
                             </DataTable.Row>
                             
                         }
@@ -91,6 +91,7 @@ export function ConsumptionScreen({navigation, route}) {
                 </DataTable>
                 </>
             }
+
             <TouchableOpacity style={[styles.roundedButton]} onPress={()=> {
                 navigation.navigate("NewSupplyScreen", Supply.getVehicleName())}}>
                 <Text style={styles.roundedButtonText} >+</Text>
