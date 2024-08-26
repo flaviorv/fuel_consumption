@@ -29,6 +29,7 @@
    <img src="./images/examples/allSupplies.png" height="450" />   
    <img src="./images/examples/allSupplies2.png" height="450"/>
    <img src="./images/examples/allSupplies3.png" height="450" />
+   <img src="./images/examples/allSupplies4.png" height="450" />
 </div>
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
