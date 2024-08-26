@@ -12,7 +12,7 @@ export class Vehicle {
     }
 
     csvData(): string{
-        return `${this.name},${this.type}\n`
+        return `${this.name},${this.type}\n`;
     }
     
     private static filePath = `${RNFS.DocumentDirectoryPath}/vehicles.csv`;

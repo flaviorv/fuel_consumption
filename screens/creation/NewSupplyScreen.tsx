@@ -12,7 +12,7 @@ export function NewSupplyScreen({navigation}){
 
     const [lastSupply, setLastSupply] = useState(Object);
 
-    const supply = new Supply(0, 0, 0)
+    const supply = new Supply(0, 0, 0, 0)
     supply.setCurrentDate()
 
     const isFocused = useIsFocused();
@@ -24,9 +24,9 @@ export function NewSupplyScreen({navigation}){
                 let lines = content.split("\n")
                 let lastLine = lines[lines.length -2]
                 let _lastSupply = lastLine.split(",")
-                let __lastSupply = new Supply(Number(_lastSupply[1]), Number(_lastSupply[2]), Number(_lastSupply[3]));
+                let __lastSupply = new Supply(Number(_lastSupply[1]), Number(_lastSupply[2]), Number(_lastSupply[3]), Number(_lastSupply[4]) );
                 setLastSupply(__lastSupply);
-                console.log(lastSupply)
+                console.log(lastSupply, "last -- sully screen")
             })
             .catch((error: Error) => {
                 console.log(error.message);
@@ -41,12 +41,14 @@ export function NewSupplyScreen({navigation}){
             <Text style={styles.supplyTitle}>{supply.date}</Text>
             <Text style={styles.supplyTitle}>{"Abastecimento de "+vheicleName}</Text>
         
-            <TextInput style={_styles.textInputs} placeholder="Quilometragem" onChangeText={(_km: string) => {supply.realKm = supply.adjustOdometerLength(Number(_km), lastSupply); supply.kmTiped = Number(_km)}}/>
+            <TextInput style={_styles.textInputs} placeholder="Quilometragem" onChangeText={(_km: string) => {supply.kmTiped = Number(_km)}}/>
             <TextInput style={_styles.textInputs} placeholder="Litros" onChangeText={(_liters: string) => {supply.liters = Number(_liters);}}/>
            
            
             <TouchableOpacity style={{alignItems: "center", margin: 30, backgroundColor: "#000000", width: "40%", padding: 11, alignSelf: "center", borderRadius: 20}} onPress={() => {
-                Supply.setVehicleName(vheicleName), Supply.saveSupply(supply)}} >
+                supply.realKm = supply.adjustOdometerLength(supply.kmTiped, lastSupply)
+                Supply.setVehicleName(vheicleName), Supply.saveSupply(supply)}} 
+                >
                 <Image source={require("../../images/gas_station/gs5.png")}/>
                 <Text style={{fontSize: 15,  fontFamily: "RobotoCondensed-Bold"}}>CONFIRMAR</Text>
             </TouchableOpacity>

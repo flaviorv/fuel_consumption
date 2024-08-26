@@ -1,5 +1,6 @@
 import React from "react"
 import * as RNFS  from "react-native-fs"
+import { Vehicle } from "./Vehicle";
 
 export class Supply {
     date!: string;
@@ -10,12 +11,14 @@ export class Supply {
     consumptionSincePrevious: string = "--";
     private static vehicleName?: string;
     private static filePath: string;
+    odometerDigits:number;
 
     
-    constructor( kmTiped: number, realKm: number, liters: number){
+    constructor( kmTiped: number, realKm: number, liters: number, odometerDigitis: number){
         this.kmTiped = kmTiped;
         this.realKm = realKm,
-        this.liters = liters;
+        this.liters = liters,
+        this.odometerDigits = odometerDigitis;
     }
 
     setCurrentDate(){
@@ -24,7 +27,7 @@ export class Supply {
     }
 
     csvData(): string{
-        return `${this.date},${this.kmTiped},${this.realKm},${this.liters}\n`;
+        return `${this.date},${this.kmTiped},${this.realKm},${this.liters},${this.odometerDigits}\n`;
     }
 
     
@@ -67,29 +70,45 @@ export class Supply {
         return this.kmTraveledSincePrevious = traveled;
     }
 
-    adjustOdometerLength(current: number, last: Supply): Number{
-    
+    adjustOdometerLength(currentTyped: number, last: Supply){
         if(last.kmTiped != undefined) {
-            let currentLength = current.toString().length
-            let lastLength = last.realKm.toString().length
-            
-            if(currentLength < lastLength){
-                let difference = lastLength - currentLength;
-                let missingPart = last.realKm.toString().slice(0, difference) 
-                console.log(missingPart)
-                let join = missingPart + current.toString()
-                console.log(join)
-                let _current = Number(join)
-                
-                if(_current <= last.realKm){
-                    _current += Math.pow(10, last.kmTiped.toString().length);
+            return this.notReachedNumbers(last) + this.checkTurning(currentTyped, last) + currentTyped;
+        
+        }       
+        return currentTyped;
+    }
+
+    checkTurning(currentTyped: number, last: Supply): number{
+        if(last.kmTiped != undefined) {
+            if(currentTyped <= last.kmTiped){
+                if(this.odometerDigits == 0){
+                    this.odometerDigits = last.kmTiped.toString().length
                 }
-                console.log(_current , "current")
-                return Number(_current);
-            
-            }
+                console.log(this.odometerDigits, "odometer digites ")
+                return Math.pow(10, this.odometerDigits);
+            } 
         }
-        return current;
+        return 0;
+    }
+
+    notReachedNumbers(last: Supply): number{
+        let notReachedNumbers = 0;
+        console.log(last, " last")
+        if(last.kmTiped != undefined) {
+
+            if(last.odometerDigits != 0){
+                this.odometerDigits = last.odometerDigits;
+                notReachedNumbers = last.realKm.toString().length - this.odometerDigits
+                let zeros = ""
+                for(let i = 0; i < this.odometerDigits; i++) {
+                    zeros += "0"
+                    console.log(0);
+                }
+                notReachedNumbers = Number(last.realKm.toString().slice(0, notReachedNumbers)+zeros)
+            }    
+        }
+        console.log(notReachedNumbers, " --- not reached numbers")
+        return notReachedNumbers;
     }
     
     

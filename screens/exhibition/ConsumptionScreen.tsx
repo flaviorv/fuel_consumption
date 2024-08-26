@@ -29,14 +29,16 @@ export function ConsumptionScreen({navigation, route}) {
                     let kmTiped = Number(lines[1]);
                     let km = Number(supply[2]);
                     let l =  Number(supply[3])
-                    let currentSupply = new Supply(kmTiped, km, l);
+                    let o = Number(supply[4])
+                    let currentSupply = new Supply(kmTiped, km, l, o);
                     currentSupply.date = supply[0]
                     if(i != 0){
                         let _previousSupply = lines[i-1].split(",");
-                        let _previousKmTiped = Number(_previousSupply[1])
+                        let prevKmTiped = Number(_previousSupply[1])
                         let prevKm = Number(_previousSupply[2]);
                         let prevL = Number(_previousSupply[3]);
-                        let previousSupply = new Supply(_previousKmTiped, prevKm, prevL);
+                        let prevOdomLen = Number(_previousSupply[4])
+                        let previousSupply = new Supply(prevKmTiped, prevKm, prevL, prevOdomLen);
                         currentSupply.calculateKmTraveled(previousSupply);
                         currentSupply.calculateConsumption();
                         
@@ -68,11 +70,11 @@ export function ConsumptionScreen({navigation, route}) {
                 <>
                 
                 <Text style={{fontSize: 20, fontFamily: "RobotoCondensed-Italic", color: "#556466", textAlign: "center"}}>Consumo médio:</Text>
-                <Text style={{fontSize: 30, fontFamily: "RobotoCondensed-Italic", color: "#664578", textAlign: "center"}}>{isNaN(average) ? "--" : average + " litros"}</Text>
+                <Text style={{fontSize: 30, fontFamily: "RobotoCondensed-Italic", color: "#664578", textAlign: "center"}}>{isNaN(average) ? "--" : average + " km/l"}</Text>
                 <DataTable style={{alignSelf: "center", width: "100%", marginTop: 40, height: 350, borderWidth: 3, borderColor: "#777777", backgroundColor: "#333666"}}>
                     <DataTable.Header style={{ backgroundColor: "#333666", borderColor: "#000000"}}>
-                        <DataTable.Cell><Text style={{fontSize: 15}}>CONSUMO</Text></DataTable.Cell>
-                        <DataTable.Cell><Text style={{fontSize: 15}}>DATA</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={{fontSize: 15}}>Consumo desde o último abastecimento em km/l</Text></DataTable.Cell>
+                        <DataTable.Cell><Text style={{fontSize: 15}}>Data / Hora</Text></DataTable.Cell>
                     </DataTable.Header>
                 
                     <FlatList 
