@@ -1,3 +1,36 @@
+# This is a mobile app to calculate the consumptiom average of the vehicles.
+
+## Initial Screen showing all registered vehicles
+<div>
+   <img src="./images/examples/allVehicles 4.png" height="500" />
+   <img src="./images/examples/allVehicles.png"  height="500" />
+   <img src="./images/examples/allVehicles2.png"  height="500" />
+   <img src="./images/examples/allVehicles3.png"  height="500" />
+</div>
+
+## Register some vehicles
+<div>
+   <img src="./images/examples/registerVehicle.png"  height="500" />
+   <img src="./images/examples/registerVehicle2.png" height="500" />
+   <img src="./images/examples/registerVehicle3.png"  height="500" />
+</div>
+
+## Odometer Tests (It considering when the odometer turn after reach your digits limit).
+<div>
+   <img src="./images/examples/supplyBeforeTest.png" height="400" />   
+   <img src="./images/examples/test1.png" height="400"/>
+   <img src="./images/examples/supplyAfterTest.png" height="400" />
+   <img src="./images/examples/test2.png" height="400" />
+   <img src="./images/examples/supplyAfterTest2.png"  height="400"/>
+</div>
+
+## Screen of the consumption average and the supplies list of a specifc vehicle.
+<div>
+   <img src="./images/examples/allSupplies.png" height="450" />   
+   <img src="./images/examples/allSupplies2.png" height="450"/>
+   <img src="./images/examples/allSupplies3.png" height="450" />
+</div>
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
