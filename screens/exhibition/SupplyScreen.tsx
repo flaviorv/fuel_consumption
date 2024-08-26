@@ -19,7 +19,7 @@ export function SupplyScreen({navigation, route}) {
                 <Text style={styles.supplyTitle}>Dia: {day}</Text>
                 <Text style={styles.supplyTitle}>Horário: {hour}</Text>
                 <Text style={styles.supplyTitle}>Quantidade: {route.params.item.liters.toFixed(1)} litros</Text>
-                <Text style={styles.supplyTitle}>Odômetro: {route.params.item.km.toFixed(1)} Km</Text>                
+                <Text style={styles.supplyTitle}>Odômetro: {route.params.item.realKm.toFixed(1)} Km</Text>                
         </View>
     )   
 }

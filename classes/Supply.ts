@@ -3,7 +3,8 @@ import * as RNFS  from "react-native-fs"
 
 export class Supply {
     date!: string;
-    km: number;
+    realKm: number;
+    kmTiped: number;
     liters: number;
     kmTraveledSincePrevious: number= 0;
     consumptionSincePrevious: string = "--";
@@ -11,8 +12,9 @@ export class Supply {
     private static filePath: string;
 
     
-    constructor(km: number, liters: number){
-        this.km = km,
+    constructor( kmTiped: number, realKm: number, liters: number){
+        this.kmTiped = kmTiped;
+        this.realKm = realKm,
         this.liters = liters;
     }
 
@@ -22,7 +24,7 @@ export class Supply {
     }
 
     csvData(): string{
-        return `${this.date},${this.km},${this.liters}\n`;
+        return `${this.date},${this.kmTiped},${this.realKm},${this.liters}\n`;
     }
 
     
@@ -61,28 +63,32 @@ export class Supply {
     }
 
     calculateKmTraveled(previousSupply: Supply){
-        let traveled = this.km - previousSupply.km;
+        let traveled = this.realKm - previousSupply.realKm;
         return this.kmTraveledSincePrevious = traveled;
     }
 
-    adjustOdometerLength(current: number, last: number){
-        let currentLength = current.toString().length
-        let lastLength = last.toString().length
-        if(currentLength < lastLength){
-            let difference = lastLength - currentLength;
-            let missingPart = last.toString().slice(0, difference) 
-            console.log(missingPart)
-            let join = missingPart + current.toString()
-            console.log(join)
-            let _current = Number(join)
+    adjustOdometerLength(current: number, last: Supply): Number{
+    
+        if(last.kmTiped != undefined) {
+            let currentLength = current.toString().length
+            let lastLength = last.realKm.toString().length
             
-            if(_current <= last){
-                current += Math.pow(10, last.toString().length);
-            }else{
-                current = _current;
+            if(currentLength < lastLength){
+                let difference = lastLength - currentLength;
+                let missingPart = last.realKm.toString().slice(0, difference) 
+                console.log(missingPart)
+                let join = missingPart + current.toString()
+                console.log(join)
+                let _current = Number(join)
+                
+                if(_current <= last.realKm){
+                    _current += Math.pow(10, last.kmTiped.toString().length);
+                }
+                console.log(_current , "current")
+                return Number(_current);
+            
             }
         }
-        
         return current;
     }
     

@@ -10,9 +10,9 @@ export function NewSupplyScreen({navigation}){
     const route = useRoute();
     const vheicleName: string = route.params.toString();
 
-    const [lastKm, setLastKm] = useState(0);
+    const [lastSupply, setLastSupply] = useState(Object);
 
-    const supply = new Supply(0, 0)
+    const supply = new Supply(0, 0, 0)
     supply.setCurrentDate()
 
     const isFocused = useIsFocused();
@@ -23,9 +23,10 @@ export function NewSupplyScreen({navigation}){
             .then((content) => {
                 let lines = content.split("\n")
                 let lastLine = lines[lines.length -2]
-                let lastSupply = lastLine.split(",")
-                let _lastKm =  Number(lastSupply[1])
-                setLastKm(_lastKm)
+                let _lastSupply = lastLine.split(",")
+                let __lastSupply = new Supply(Number(_lastSupply[1]), Number(_lastSupply[2]), Number(_lastSupply[3]));
+                setLastSupply(__lastSupply);
+                console.log(lastSupply)
             })
             .catch((error: Error) => {
                 console.log(error.message);
@@ -40,7 +41,7 @@ export function NewSupplyScreen({navigation}){
             <Text style={styles.supplyTitle}>{supply.date}</Text>
             <Text style={styles.supplyTitle}>{"Abastecimento de "+vheicleName}</Text>
         
-            <TextInput style={_styles.textInputs} placeholder="Quilometragem" onChangeText={(_km: string) => {supply.km = supply.adjustOdometerLength(Number(_km), lastKm);}}/>
+            <TextInput style={_styles.textInputs} placeholder="Quilometragem" onChangeText={(_km: string) => {supply.realKm = supply.adjustOdometerLength(Number(_km), lastSupply); supply.kmTiped = Number(_km)}}/>
             <TextInput style={_styles.textInputs} placeholder="Litros" onChangeText={(_liters: string) => {supply.liters = Number(_liters);}}/>
            
            

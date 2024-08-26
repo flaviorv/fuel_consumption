@@ -26,21 +26,22 @@ export function ConsumptionScreen({navigation, route}) {
                 let conAverage = new ConsumptionAverage()
                 for(let i = 0; i < lines.length-1; i++) {
                     let supply = lines[i].split(",");
-                    let km = Number(supply[1]);
-                    let l =  Number(supply[2])
-                    let currentSupply = new Supply(km, l);
+                    let kmTiped = Number(lines[1]);
+                    let km = Number(supply[2]);
+                    let l =  Number(supply[3])
+                    let currentSupply = new Supply(kmTiped, km, l);
                     currentSupply.date = supply[0]
                     if(i != 0){
                         let _previousSupply = lines[i-1].split(",");
-                        let prevKm = Number(_previousSupply[1]);
-                        let prevL = Number(_previousSupply[2]);
-                        let previousSupply = new Supply(prevKm, prevL);
+                        let _previousKmTiped = Number(_previousSupply[1])
+                        let prevKm = Number(_previousSupply[2]);
+                        let prevL = Number(_previousSupply[3]);
+                        let previousSupply = new Supply(_previousKmTiped, prevKm, prevL);
                         currentSupply.calculateKmTraveled(previousSupply);
                         currentSupply.calculateConsumption();
                         
                         conAverage.totalKm += currentSupply.kmTraveledSincePrevious;
                         conAverage.totalL += l;
-                        console.log("km " + conAverage.totalKm + "liters " + conAverage.totalL);
                     }
                    
                     _supplies.push(currentSupply);
