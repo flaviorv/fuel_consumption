@@ -15,21 +15,14 @@
    <img src="./images/examples/registerVehicle3.png"  height="380" />
 </div>
 
-## Odometer Tests (It considering when the odometer turn after reach your digits limit).
+## Screens of the consumption average and the supplies of the vehicles.
 <div>
-   <img src="./images/examples/supplyBeforeTest.png" height="380" />   
-   <img src="./images/examples/test1.png" height="380"/>
-   <img src="./images/examples/supplyAfterTest.png" height="380" />
-   <img src="./images/examples/test2.png" height="380" />
-   <img src="./images/examples/supplyAfterTest2.png"  height="380"/>
-</div>
-
-## Screen of the consumption average and the supplies list of a specifc vehicle.
-<div>
-   <img src="./images/examples/allSupplies.png" height="380" />   
-   <img src="./images/examples/allSupplies2.png" height="380"/>
-   <img src="./images/examples/allSupplies3.png" height="380" />
-   <img src="./images/examples/allSupplies4.png" height="380" />
+   <img src="./images/examples/consumption1.png" height="380" />   
+   <img src="./images/examples/consumption2.png" height="380"/>
+   <img src="./images/examples/supply1.png" height="380" />
+   <img src="./images/examples/supply2.png" height="380" />
+   <img src="./images/examples/consumption3.png" height="380" />
+   <img src="./images/examples/supply3.png" height="380" />
 </div>
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
